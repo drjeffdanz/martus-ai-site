@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>martus.ai — The Enterprise Intelligence Platform</title>
+<meta name="description" content="martus.ai is the nervous system for the automated enterprise. Witness every decision across every system — cross-system causal chains, silent AI-failure detection, and audit-ready provenance for the hyperautomated enterprise." />
+<meta name="theme-color" content="#070a0f" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="martus.ai — Witness Every Decision. Across Every System." />
+<meta property="og:description" content="The cross-system witness for the automated enterprise. Reconstruct causal chains, catch silent AI failures, and ship audit-ready provenance." />
+<meta property="og:url" content="https://martus.ai" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #070a0f;
+    --bg-2:      #0b1018;
+    --panel:     #0e141d;
+    --panel-2:   #111927;
+    --line:      #1c2738;
+    --line-soft: #16202e;
+    --text:      #eef2f8;   /* primary text — AA+ on bg */
+    --muted:     #aab6c7;   /* secondary text — AA on bg */
+    --faint:     #7c8aa0;
+    --cyan:      #38bdf8;   /* Ponteon */
+    --green:     #34d399;   /* Turrion */
+    --violet:    #a78bfa;   /* Arxeon */
+    --amber:     #fbbf24;
+    --rose:      #fb7185;
+    --maxw: 1120px;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .display { font-family: "Space Grotesk", "Inter", sans-serif; letter-spacing: -0.02em; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 14px;
+  }
+
+  /* Accessible focus */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(7,10,15,0.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: "Space Grotesk"; font-weight: 700; font-size: 20px; }
+  .brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+    font-family: "Inter"; font-weight: 600; font-size: 14px;
+    padding: 11px 20px; border-radius: 10px; cursor: pointer; border: 1px solid transparent;
+    transition: transform .12s, box-shadow .2s, background .2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    color: #04120c; box-shadow: 0 6px 24px rgba(52,211,153,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(52,211,153,0.35); }
+  .btn-ghost { border-color: var(--line); color: var(--text); background: var(--panel); }
+  .btn-ghost:hover { border-color: var(--cyan); }
+  .nav-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; color: var(--text); cursor: pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 96px 0 72px; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(720px 360px at 50% -8%, rgba(56,189,248,0.10), transparent 60%),
+      radial-gradient(620px 320px at 85% 10%, rgba(167,139,250,0.08), transparent 60%),
+      radial-gradient(620px 320px at 12% 18%, rgba(52,211,153,0.08), transparent 60%);
+  }
+  .grid-bg {
+    position: absolute; inset: 0; z-index: 0; opacity: .35;
+    background-image:
+      linear-gradient(rgba(28,39,56,0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,39,56,0.55) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+  }
+  .hero .wrap { position: relative; z-index: 1; text-align: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 26px;
+    padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--muted); font-size: 13px; font-weight: 500;
+  }
+  .badge .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .hero h1 { font-size: clamp(38px, 6vw, 72px); font-weight: 700; line-height: 1.02; margin: 0 0 22px; }
+  .hero h1 .grad {
+    background: linear-gradient(115deg, var(--cyan), var(--green) 55%, var(--violet));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead { font-size: clamp(17px, 2vw, 21px); color: var(--muted); max-width: 720px; margin: 0 auto 34px; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero-meta { margin-top: 34px; color: var(--faint); font-size: 13px; letter-spacing: .04em; }
+  .pillrow { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .pill { padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; letter-spacing: .04em; background: var(--panel); border: 1px solid var(--line); }
+  .pill.c { color: var(--cyan); border-color: rgba(56,189,248,.4); }
+  .pill.g { color: var(--green); border-color: rgba(52,211,153,.4); }
+  .pill.v { color: var(--violet); border-color: rgba(167,139,250,.4); }
+
+  /* ---------- SECTION ---------- */
+  section { padding: 80px 0; position: relative; }
+  .section-head { max-width: 760px; margin-bottom: 48px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; margin: 0 0 16px; }
+  .section-head p { font-size: 18px; color: var(--muted); margin: 0; }
+
+  .alt { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+
+  /* ---------- STATS ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .stat { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; background: var(--panel); position: relative; overflow: hidden; }
+  .stat::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; }
+  .stat.s1::before { background: var(--cyan); } .stat.s1 .num { color: var(--cyan); }
+  .stat.s2::before { background: var(--rose); } .stat.s2 .num { color: var(--rose); }
+  .stat.s3::before { background: var(--amber); } .stat.s3 .num { color: var(--amber); }
+  .stat .num { font-family: "Space Grotesk"; font-size: 54px; font-weight: 700; line-height: 1; }
+  .stat .lbl { margin-top: 12px; color: var(--muted); font-size: 15px; }
+  .callout {
+    margin-top: 34px; padding: 26px 28px; border-radius: var(--radius);
+    background: var(--panel-2); border: 1px solid var(--line);
+  }
+  .callout strong { color: var(--text); }
+  .callout p { margin: 8px 0 0; color: var(--muted); }
+  .callout .lead-line { font-family: "Space Grotesk"; font-size: 19px; font-weight: 600; color: var(--text); }
+  .src { color: var(--faint); font-size: 12.5px; margin-top: 16px; }
+
+  /* ---------- TIMELINE ---------- */
+  .tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .tl .node { border: 1px solid var(--line); border-radius: 12px; padding: 18px 16px; background: var(--panel); position: relative; }
+  .tl .node .t { font-family: "Space Grotesk"; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+  .tl .node .d { color: var(--muted); font-size: 14px; }
+  .tl .n1 .t { color: var(--cyan); } .tl .n2 .t { color: var(--violet); }
+  .tl .n3 .t { color: var(--rose); } .tl .n4 .t { color: var(--amber); } .tl .n5 .t { color: var(--faint); }
+  .tl .node:not(:last-child)::after {
+    content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%);
+    color: var(--faint); font-size: 16px; z-index: 2;
+  }
+  .resolve {
+    margin-top: 24px; border: 1px solid rgba(52,211,153,.45); border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(52,211,153,.08), rgba(52,211,153,.02));
+    padding: 26px 28px;
+  }
+  .resolve .h { color: var(--green); font-family: "Space Grotesk"; font-weight: 700; margin-bottom: 8px; }
+  .resolve p { margin: 0; color: var(--muted); }
+  .resolve b { color: var(--text); }
+
+  /* ---------- CAPABILITIES ---------- */
+  .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cap { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; background: var(--panel); transition: border-color .2s, transform .2s; }
+  .cap:hover { transform: translateY(-3px); }
+  .cap .k { display: inline-flex; align-items: center; gap: 10px; font-family: "Space Grotesk"; font-weight: 700; font-size: 19px; margin-bottom: 12px; }
+  .cap .chip { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 15px; }
+  .cap p { color: var(--muted); margin: 0; font-size: 15px; }
+  .cap.k1:hover { border-color: var(--cyan); } .cap.k1 .chip { background: rgba(56,189,248,.15); color: var(--cyan); }
+  .cap.k2:hover { border-color: var(--green); } .cap.k2 .chip { background: rgba(52,211,153,.15); color: var(--green); }
+  .cap.k3:hover { border-color: var(--violet); } .cap.k3 .chip { background: rgba(167,139,250,.15); color: var(--violet); }
+  .cap.k4:hover { border-color: var(--amber); } .cap.k4 .chip { background: rgba(251,191,36,.15); color: var(--amber); }
+  .cap.k1 .k { color: var(--cyan); } .cap.k2 .k { color: var(--green); }
+  .cap.k3 .k { color: var(--violet); } .cap.k4 .k { color: var(--amber); }
+
+  /* ---------- PRODUCTS ---------- */
+  .prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .prod { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; background: var(--panel); position: relative; overflow: hidden; }
+  .prod::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .prod h3 { font-size: 24px; margin: 0 0 4px; letter-spacing: .02em; }
+  .prod .codename { font-style: italic; color: var(--faint); font-size: 14px; margin-bottom: 14px; }
+  .prod .layer { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .prod ul { list-style: none; padding: 0; margin: 0; }
+  .prod li { color: var(--muted); font-size: 14.5px; padding: 7px 0 7px 20px; position: relative; }
+  .prod li::before { content: ""; position: absolute; left: 0; top: 14px; width: 7px; height: 7px; border-radius: 2px; }
+  .prod.p1::before { background: var(--cyan); } .prod.p1 h3, .prod.p1 .layer { color: var(--cyan); } .prod.p1 li::before { background: var(--cyan); }
+  .prod.p2::before { background: var(--green); } .prod.p2 h3, .prod.p2 .layer { color: var(--green); } .prod.p2 li::before { background: var(--green); }
+  .prod.p3::before { background: var(--violet); } .prod.p3 h3, .prod.p3 .layer { color: var(--violet); } .prod.p3 li::before { background: var(--violet); }
+
+  /* ---------- COMPARISON ---------- */
+  .cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px; }
+  .cmp th, .cmp td { padding: 14px 16px; text-align: center; border-bottom: 1px solid var(--line); }
+  .cmp th:first-child, .cmp td:first-child { text-align: left; color: var(--muted); }
+  .cmp thead th { color: var(--faint); font-weight: 600; font-size: 13px; }
+  .cmp .me { color: var(--green); font-weight: 700; }
+  .cmp td.me-col { background: rgba(52,211,153,.06); }
+  .cmp .yes { color: var(--green); font-weight: 700; }
+  .cmp .no { color: var(--faint); }
+  .cmp .part { color: var(--amber); }
+  .cmp-wrap { border: 1px solid var(--line); border-radius: var(--radius); overflow-x: auto; background: var(--panel); }
+
+  /* ---------- WHY NOW ---------- */
+  .force-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .force { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: var(--panel); }
+  .force h4 { font-family: "Space Grotesk"; font-size: 17px; margin: 0 0 4px; }
+  .force .tag { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+  .force p { color: var(--muted); font-size: 14px; margin: 0; }
+  .force.f1 h4 { color: var(--cyan); } .force.f2 h4 { color: var(--violet); } .force.f3 h4 { color: var(--green); }
+  .force.f4 h4 { color: var(--amber); } .force.f5 h4 { color: var(--rose); }
+
+  /* ---------- FOUNDER ---------- */
+  .founder { display: grid; grid-template-columns: 1fr 1.3fr; gap: 44px; align-items: center; }
+  .founder .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; background: var(--panel); }
+  .founder .name { font-family: "Space Grotesk"; font-size: 26px; font-weight: 700; margin: 0; }
+  .founder .role { color: var(--green); font-weight: 600; margin: 6px 0 18px; font-size: 15px; }
+  .founder p { color: var(--muted); margin: 0 0 18px; }
+  .firsts { display: grid; gap: 10px; margin: 22px 0; }
+  .first { display: flex; gap: 12px; align-items: flex-start; color: var(--text); font-size: 14.5px; }
+  .first .mk { color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .cred-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .cred { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--panel-2); }
+  .cred .big { font-family: "Space Grotesk"; font-size: 26px; font-weight: 700; color: var(--cyan); }
+  .cred .sm { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .cred.c2 .big { color: var(--green); } .cred.c3 .big { color: var(--violet); } .cred.c4 .big { color: var(--amber); }
+
+  /* ---------- CTA ---------- */
+  .cta-band { text-align: center; }
+  .cta-band .box {
+    border: 1px solid rgba(56,189,248,.3); border-radius: 20px; padding: 56px 32px;
+    background:
+      radial-gradient(600px 240px at 50% 0%, rgba(56,189,248,.10), transparent 70%),
+      var(--panel);
+  }
+  .cta-band h2 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 14px; }
+  .cta-band .q { font-family: "Space Grotesk"; font-style: italic; color: var(--green); }
+  .cta-band p { color: var(--muted); max-width: 560px; margin: 0 auto 28px; font-size: 17px; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--line-soft); padding: 44px 0; color: var(--faint); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 14px; }
+  .foot a { color: var(--muted); } .foot a:hover { color: var(--text); }
+  .foot .links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .stats, .prod-grid, .force-grid { grid-template-columns: 1fr; }
+    .cap-grid { grid-template-columns: 1fr; }
+    .tl { grid-template-columns: 1fr 1fr; }
+    .tl .node::after { display: none; }
+    .founder { grid-template-columns: 1fr; gap: 28px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: inline-flex; }
+    header.nav.open .nav-links {
+      display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column;
+      gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 8px 24px 18px;
+    }
+    header.nav.open .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+    header.nav.open .nav-links .btn { margin-top: 12px; }
+  }
+  @media (max-width: 520px) {
+    .tl { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>martus<span style="color:var(--faint)">.ai</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#problem">Problem</a>
+      <a href="#platform">Platform</a>
+      <a href="#products">Products</a>
+      <a href="#why-now">Why Now</a>
+      <a href="#founder">Founder</a>
+      <a class="btn btn-primary" href="#contact">Request a Briefing</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="badge"><span class="pulse" aria-hidden="true"></span>The Enterprise Intelligence Platform</span>
+    <h1>Witness Every Decision.<br /><span class="grad">Across Every System.</span></h1>
+    <p class="lead">Your AI agents and automated workflows make millions of decisions a day — across SAP, Salesforce, ServiceNow, and beyond — with no central record of what they decided, or why. martus.ai is the nervous system for the automated enterprise: a cross-system witness that connects cause to consequence.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Request a Briefing</a>
+      <a class="btn btn-ghost" href="#platform">See How It Works</a>
+    </div>
+    <div class="pillrow">
+      <span class="pill c">PONTEON · The Bridge</span>
+      <span class="pill g">TURRION · The Watchtower</span>
+      <span class="pill v">ARXEON · The Citadel</span>
+    </div>
+    <p class="hero-meta">Defense-grade provenance · Air-gap ready · Vendor-agnostic · Audit-ready for the EU AI Act</p>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Problem</p>
+      <h2>The hyperautomated enterprise is flying blind</h2>
+      <p>AI agents and automated workflows make millions of decisions daily with no central witness. Every failure stays invisible until the damage is done.</p>
+    </div>
+    <div class="stats">
+      <div class="stat s1 reveal"><div class="num">90%</div><div class="lbl">of large enterprises treat hyperautomation as a top priority</div></div>
+      <div class="stat s2 reveal"><div class="num">78%</div><div class="lbl">of AI agent failures are silent — no error, just a wrong answer</div></div>
+      <div class="stat s3 reveal"><div class="num">60%</div><div class="lbl">of AI initiatives abandoned due to bad data quality</div></div>
+    </div>
+    <div class="callout reveal">
+      <span class="lead-line">Every one of these failures was invisible until the damage was done.</span>
+      <p>The hyperautomated enterprise needs a nervous system — not just another observability tool, but a cross-system witness that connects cause to consequence.</p>
+      <p class="src">Sources: Gartner 2026 · Confident AI · Leapwork Hyperautomation Report</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Tuesday, 7:14am · A $2.1M question</p>
+      <h2>“Why did we spend $2.1M in emergency freight last week?”</h2>
+      <p>Six AI agents. Three systems. 847 automated decisions overnight. By the time the bill arrived, no one could reconstruct what happened — or why.</p>
+    </div>
+    <div class="tl">
+      <div class="node n1 reveal"><div class="t">2:11am Wed</div><div class="d">6 AI agents fire across 3 systems</div></div>
+      <div class="node n2 reveal"><div class="t">2:15am</div><div class="d">847 automated decisions made</div></div>
+      <div class="node n3 reveal"><div class="t">2:17am</div><div class="d">Agents contradict each other</div></div>
+      <div class="node n4 reveal"><div class="t">8:30am</div><div class="d">$2.1M freight bill arrives</div></div>
+      <div class="node n5 reveal"><div class="t">3 weeks</div><div class="d">Manual post-mortem complete</div></div>
+    </div>
+    <div class="resolve reveal">
+      <div class="h">With martus.ai</div>
+      <p>Sarah types <b>“What happened in freight ops last week?”</b> and gets the full cross-system causal chain in <b>4 minutes — not 3 weeks.</b> Every agent action, every triggered decision, the complete $2.1M story. Pattern Intelligence surfaces that this same conflict recurs <b>34% of the time</b> — and it gets fixed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM / CAPABILITIES -->
+<section id="platform" class="alt">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">The Platform</p>
+      <h2>The nervous system for the automated enterprise</h2>
+      <p>Four capabilities working as one — from raw signal to intelligent intervention.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap k1 reveal"><div class="k"><span class="chip" aria-hidden="true">◉</span>Witness</div><p>Captures every decision, action, and event across all enterprise systems in real time — SAP, Salesforce, ServiceNow, Databricks, or any custom API.</p></div>
+      <div class="cap k2 reveal"><div class="k"><span class="chip" aria-hidden="true">↔</span>Connect</div><p>Reconstructs causal chains across system boundaries. Links Agent A's action to Agent B's reaction to the $2.1M consequence — across three platforms.</p></div>
+      <div class="cap k3 reveal"><div class="k"><span class="chip" aria-hidden="true">✦</span>Intelligence</div><p>Detects patterns, structural gaps, and agent conflicts. Gets smarter with every event, predicting failure modes before they compound into cost.</p></div>
+      <div class="cap k4 reveal"><div class="k"><span class="chip" aria-hidden="true">⤳</span>Act</div><p>Writes back into source systems with human-in-the-loop approval or automated remediation. Not just a witness — an intelligent intervention layer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Three Products. One Platform.</p>
+      <h2>A fortress architecture for enterprise intelligence</h2>
+      <p>Bridge, Watchtower, Citadel — each a distinct layer, engineered to operate together.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod p1 reveal">
+        <h3>PONTEON</h3>
+        <div class="codename">The Bridge</div>
+        <div class="layer">Interoperability Layer</div>
+        <ul>
+          <li>Pre-built connectors: SAP, Salesforce, ServiceNow, Databricks +50</li>
+          <li>Sentinel Nodes: on-prem and air-gapped edge agents</li>
+          <li>Signal Pipeline: normalize, enrich, timestamp, score</li>
+          <li>Trust Engine: freshness, completeness &amp; provenance rating</li>
+        </ul>
+      </div>
+      <div class="prod p2 reveal">
+        <h3>TURRION</h3>
+        <div class="codename">The Watchtower</div>
+        <div class="layer">Witness &amp; Intelligence Layer</div>
+        <ul>
+          <li>Testimony Graph: causal chains reconstructed cross-system</li>
+          <li>Divergence Detection: agents acting in conflict</li>
+          <li>Run Registry &amp; Context Vault: per-decision audit record</li>
+          <li>Forward Signals: predictive pattern detection</li>
+        </ul>
+      </div>
+      <div class="prod p3 reveal">
+        <h3>ARXEON</h3>
+        <div class="codename">The Citadel</div>
+        <div class="layer">Semantic Graph Layer</div>
+        <ul>
+          <li>Entity, Workflow &amp; Agent Registries — agents as first-class entities</li>
+          <li>Causality Map: full cross-system relationship graph</li>
+          <li>Chronicle: point-in-time state recall of any past moment</li>
+          <li>Ask Martus: natural-language query across the full graph</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="compare" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Where We Fit</p>
+      <h2>No one else sees the full picture</h2>
+      <p>Incumbents are strong inside their own walls. martus.ai is built for the space between them — cross-system, cross-vendor, across every agent.</p>
+    </div>
+    <div class="cmp-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr><th>Capability</th><th>Celonis</th><th>Datadog</th><th>Databricks</th><th>Palantir</th><th class="me">martus.ai</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cross-system causal chains</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="me-col yes">Yes</td></tr>
+          <tr><td>Vendor-agnostic connectors</td><td class="no">—</td><td class="part">Partial</td><td class="no">—</td><td class="no">—</td><td class="me-col yes">Yes</td></tr>
+          <tr><td>Silent AI-failure detection</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="me-col yes">Yes</td></tr>
+          <tr><td>AI agent decision auditing</td><td class="no">—</td><td class="part">Partial</td><td class="part">Partial</td><td class="no">—</td><td class="me-col yes">Yes</td></tr>
+          <tr><td>Process design vs. actual mining</td><td class="yes">Yes</td><td class="no">—</td><td class="no">—</td><td class="part">Partial</td><td class="me-col yes">Yes</td></tr>
+          <tr><td>NL query across all systems</td><td class="no">—</td><td class="no">—</td><td class="part">Partial</td><td class="part">Partial</td><td class="me-col yes">Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section id="why-now">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Why Now</p>
+      <h2>Five forces are opening the window</h2>
+      <p>Gartner's 2026 top strategic trends map directly to martus.ai. The window is now — not 2028.</p>
+    </div>
+    <div class="force-grid">
+      <div class="force f1 reveal"><h4>Digital Provenance</h4><div class="tag">Gartner Top 10, 2026</div><p>Enterprises must track the origin and custody of all data and AI outputs. martus.ai is the provenance engine.</p></div>
+      <div class="force f2 reveal"><h4>Multiagent Systems</h4><div class="tag">Gartner Top 10, 2026</div><p>40% of enterprise apps will embed AI agents by 2026. No platform watches what they do to each other.</p></div>
+      <div class="force f3 reveal"><h4>AI Observability</h4><div class="tag">Gartner: 40% of AI by 2028</div><p>APM tools cannot detect silent AI failures. 78% of agent failures produce no error signal.</p></div>
+      <div class="force f4 reveal"><h4>EU AI Act</h4><div class="tag">Fully applicable Aug 2026</div><p>High-risk AI requires documented decision trails and audit-ready records. martus.ai ships that built-in.</p></div>
+      <div class="force f5 reveal"><h4>Hyperautomation Governance</h4><div class="tag">$70B → $280B by 2035</div><p>Fewer than 20% of enterprises have mastered hyperautomation governance. The gap is the market.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Founder</p>
+      <h2>Built by someone who has run automation at defense scale</h2>
+    </div>
+    <div class="founder">
+      <div class="card reveal">
+        <p class="name">Dr. Jeff Daniels, Ph.D.</p>
+        <p class="role">Founder &amp; CEO, martus.ai</p>
+        <p>Senior Executive Program Director at Lockheed Martin and Professor of Cybersecurity at UMGC. Fifteen-plus years leading enterprise digital transformation across aerospace, defense, and complex manufacturing — including the technologies martus.ai is built to govern.</p>
+        <div class="cred-grid">
+          <div class="cred c1"><div class="big">$503M</div><div class="sm">in automation savings delivered on a $6B+ transformation</div></div>
+          <div class="cred c2"><div class="big">200+</div><div class="sm">person global technology org led; $90M budget</div></div>
+          <div class="cred c3"><div class="big">1st</div><div class="sm">doctoral dissertation ever published on cloud computing</div></div>
+          <div class="cred c4"><div class="big">Secret</div><div class="sm">active clearance; defense-grade by background</div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="firsts">
+          <div class="first"><span class="mk">▸</span><span>Deployed the defense industry's <b>first Intelligent Factory</b>, integrating generative AI, IoT, and cloud.</span></div>
+          <div class="first"><span class="mk">▸</span><span>Designed and implemented the <b>first blockchain electronic ledger</b> for Lockheed Martin and its industrial base.</span></div>
+          <div class="first"><span class="mk">▸</span><span>First AWS partner to deploy <b>GreenGrass / IoT Core on GovCloud</b>.</span></div>
+          <div class="first"><span class="mk">▸</span><span>Forbes Technology Council member · Dallas 500 Innovative Leader · NOVA Award for Business Resiliency.</span></div>
+        </div>
+        <p style="color:var(--muted);margin:0 0 20px">martus.ai is the product of a career spent making automated systems trustworthy at the highest stakes. The problem it solves is one its founder has lived.</p>
+        <a class="btn btn-ghost" href="https://drjeffdaniels.com" target="_blank" rel="noopener">View full biography ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-band">
+  <div class="wrap">
+    <div class="box reveal">
+      <p class="eyebrow" style="justify-content:center">Request a Briefing</p>
+      <h2>“Every enterprise system is making decisions.<br /><span class="q">martus.ai remembers what they decided — and why.”</span></h2>
+      <p>We're onboarding a first cohort of enterprise design partners. If your agents and workflows are making decisions you can't fully trace, let's talk.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:jeff.w.daniels@gmail.com?subject=martus.ai%20briefing%20request&amp;body=Hi%20Jeff%2C%20I'd%20like%20to%20learn%20more%20about%20martus.ai.">Email the Founder</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/jeffdaniels/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot">
+    <div><span class="brand" style="font-size:17px"><span class="dot" aria-hidden="true"></span>martus<span style="color:var(--faint)">.ai</span></span></div>
+    <div class="links">
+      <a href="#problem">Problem</a>
+      <a href="#platform">Platform</a>
+      <a href="#products">Products</a>
+      <a href="#founder">Founder</a>
+      <a href="mailto:jeff.w.daniels@gmail.com">Contact</a>
+    </div>
+    <div>© 2026 martus.ai · Witness every decision.</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  var nav = document.getElementById('nav');
+  var toggle = document.getElementById('navToggle');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.nav-links a').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>
